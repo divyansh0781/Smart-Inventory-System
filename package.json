@@ -1,0 +1,13 @@
+{
+  "name": "smart-inventory-system",
+  "version": "1.0.0",
+  "description": "Smart Inventory and Sales System: Node.js backend with a plain HTML/CSS/JS frontend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}

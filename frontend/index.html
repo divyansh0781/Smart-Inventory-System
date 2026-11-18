@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Inventory System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <b>Smart Inventory and Sales System</b>
+  <span><span id="who"></span> <button id="logoutBtn" class="light" onclick="doLogout()" hidden>Logout</button></span>
+</header>
+<main>
+  <!-- LOGIN -->
+  <div id="loginBox" class="card">
+    <h3>Login</h3>
+    <div class="row"><input id="user" placeholder="Username"><input id="pass" type="password" placeholder="Password"><button onclick="doLogin()">Login</button></div>
+    <small>Demo logins: admin / admin123 &nbsp;or&nbsp; staff / staff123</small>
+  </div>
+
+  <div id="app" hidden>
+    <nav id="tabs"></nav>
+
+    <!-- PRODUCTS -->
+    <section id="products" class="card">
+      <h3>Products</h3>
+      <div class="row">
+        <input id="search" placeholder="Search by name" oninput="showProducts()">
+        <select id="sort" onchange="showProducts()"><option value="id">Sort by ID</option><option value="name">Sort by name</option><option value="qty">Sort by stock</option></select>
+      </div>
+      <div class="scroll"><table id="prodTable"></table></div>
+      <div class="adminOnly">
+        <h4 style="margin-top:16px">Add product</h4>
+        <div class="row">
+          <select id="ptype" onchange="typeChanged()"><option value="G">General</option><option value="P">Perishable</option><option value="B">Branded</option><option value="F">Packaged food</option></select>
+          <input id="pname" placeholder="Name"><input id="pprice" type="number" min="0" placeholder="Price"><input id="pqty" type="number" min="0" placeholder="Quantity">
+          <input id="pexp" type="date" hidden><input id="pbrand" placeholder="Brand" hidden>
+          <button onclick="doAdd()">Add</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELL -->
+    <section id="sell" class="card">
+      <h3>Make a sale</h3>
+      <div class="row"><select id="sellProd"></select><input id="sellQty" type="number" min="1" value="1"><button onclick="doSell()">Sell and print bill</button></div>
+      <div id="bill"></div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="card">
+      <h3>Sales history (newest first)</h3>
+      <div class="scroll"><table id="histTable"></table></div>
+      <div class="row"><button class="red" onclick="doUndo()">Undo last sale</button></div>
+    </section>
+
+    <!-- RESTOCK -->
+    <section id="restock" class="card">
+      <h3>Restock recommendation</h3>
+      <div class="scroll"><table id="recTable"></table></div>
+      <div class="row"><button onclick="queueAll()">Add all to restock queue</button></div>
+      <h3 style="margin-top:16px">Restock queue (first in, first out)</h3>
+      <div id="queueList"></div>
+      <div class="row"><input id="recvQty" type="number" min="1" placeholder="Quantity received"><button onclick="doReceive()">Receive next delivery</button></div>
+    </section>
+  </div>
+</main>
+<div id="msg"></div>
+<script src="app.js"></script>
+</body>
+</html>
